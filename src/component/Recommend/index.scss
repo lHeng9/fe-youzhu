@@ -1,0 +1,33 @@
+@import 'src/static/comm.scss';
+
+.recommend {
+  box-sizing: border-box;
+  .contain {
+    width: $minWidth;
+    margin: 0 auto;
+    .title {
+      color: #666;
+      display: flex;
+      align-items: center;
+      @include lineHeight (50px);
+      border-bottom: 1px solid #666;
+      padding: 10px;
+      margin: 20px 0px;
+      .recommend-main {
+        padding-right: 10px;
+        margin-right: 10px;
+        border-right: 1px solid white;
+        font-size: 20px;
+        font-weight: 700;
+        @include lineHeight (30px);
+      }
+    }
+    .main{
+      display: flex;
+      justify-content: space-between;
+    }
+    .foot{
+      @include flex (space-between);
+    }
+  }
+}

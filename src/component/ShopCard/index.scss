@@ -1,0 +1,35 @@
+@import 'src/static/comm.scss';
+
+.shop-card {
+  width: 230px;
+  background-color: white;
+
+  img {
+    width: 100%;
+    display: block;
+
+  }
+
+  .main {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+
+    .desc {
+      color: #333;
+      font-size: 14px;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      overflow: hidden;
+      height:44px;
+    }
+
+    .price {
+      color: rgb(113, 73, 192);
+      font-size: 14px;
+      font-weight: bold;
+      margin-top: 5px;
+    }
+  }
+}

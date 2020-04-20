@@ -1,0 +1,28 @@
+
+@import 'src/static/comm.scss';
+
+.nav{
+  box-sizing: border-box;
+  width: 100%;
+  
+  @include lineHeight (30px);
+  background-color: #e3e4e5;
+  font-size: 12px;
+  color:#333;
+  .contain{
+    margin:0 auto;
+    width:$minWidth;
+    @include flex (space-between)
+  }
+  &-right{
+    min-width: 200px;
+    @include flex (flex-end);
+    &-item{
+      margin-left:20px;
+      cursor: pointer;
+      &:hover{
+        @include sexyColor
+      }
+    }
+  }
+}

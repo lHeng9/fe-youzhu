@@ -1,0 +1,23 @@
+@import 'src/static/comm.scss';
+
+.nav-main {
+  @include sexyBgColor;
+  @include lineHeight (40px);
+  .container {
+    width:$minWidth;
+    margin:0 auto;
+    box-sizing: border-box;
+    @include lineHeight (40px);
+    @include flex (flex-start);
+    .nav-item {
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      padding: 0 25px;
+      cursor: pointer;
+      a{
+        color:white;
+      }
+    }
+  }
+}

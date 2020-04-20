@@ -1,0 +1,28 @@
+.card {
+  width: 270px;
+  height: 120px;
+  margin-right: 10px;
+  padding: 10px;
+  background-color: #fff;
+  display:flex;
+  .cover{
+    width:100px;
+    height:100px;
+  }
+  .main{
+    font-size:12px;
+    color:#666;
+    padding-left:10px;
+    .desc{
+      height:40px;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      overflow: hidden;
+    }
+    .price{
+      color:#7149c0;
+      font-size:20px;
+    }
+  }
+}

@@ -1,0 +1,30 @@
+
+@import 'src/static/comm.scss';
+
+.top{
+  height:140px;
+  background-color: #fff;
+  padding:0 $mainPadding;
+  @include flex (center);
+  align-items: center;
+  flex-direction: column;
+  box-sizing: border-box;
+  min-width: $minWidth;
+  .search{
+    width:470px;
+    min-width: 300px;
+  }
+  .key-words{
+    width:470px;
+    min-width:300px;
+    color:#999;
+    @include lineHeight (30px);
+    span{
+      margin-right:7px;
+      cursor: pointer;
+      &:hover{
+        @include sexyColor
+      }
+    }
+  }
+}
