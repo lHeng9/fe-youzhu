@@ -1,26 +1,44 @@
-
 @import 'src/static/comm.scss';
 
-.nav{
+.nav {
   box-sizing: border-box;
   width: 100%;
-  
+
   @include lineHeight (30px);
   background-color: #e3e4e5;
   font-size: 12px;
-  color:#333;
-  .contain{
-    margin:0 auto;
-    width:$minWidth;
+  color: #333;
+
+  .contain {
+    margin: 0 auto;
+    width: $minWidth;
     @include flex (space-between)
   }
-  &-right{
+
+  &-right {
     min-width: 200px;
     @include flex (flex-end);
-    &-item{
-      margin-left:20px;
+
+    .ant-menu-vertical>.ant-menu-item,
+    .ant-menu-vertical-left>.ant-menu-item,
+    .ant-menu-vertical-right>.ant-menu-item,
+    .ant-menu-inline>.ant-menu-item,
+    .ant-menu-vertical>.ant-menu-submenu>.ant-menu-submenu-title,
+    .ant-menu-vertical-left>.ant-menu-submenu>.ant-menu-submenu-title,
+    .ant-menu-vertical-right>.ant-menu-submenu>.ant-menu-submenu-title,
+    .ant-menu-inline>.ant-menu-submenu>.ant-menu-submenu-title {
+      height: 30px;
+      line-height: 30px;
+      margin: 0;
+      border-left: 1px solid #f0f0f0;
+      border-bottom:1px solid #f0f0f0;
+    }
+
+    &-item {
+      margin-left: 20px;
       cursor: pointer;
-      &:hover{
+
+      &:hover {
         @include sexyColor
       }
     }

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Form, Input, Checkbox } from 'antd';
+import { Form, Input, Checkbox, Alert } from 'antd';
 const layout = {
   labelCol: { span: 6 },
   wrapperCol: { span: 16 },
@@ -7,7 +7,8 @@ const layout = {
 const tailLayout = {
   wrapperCol: { offset: 6, span: 16 },
 };
-const Regester = () => {
+const Regester = (props: any) => {
+  const { form, isError } = props
   const onFinish = (values: any) => {
     console.log('Success:', values);
   };
@@ -17,12 +18,19 @@ const Regester = () => {
   };
   return (
     <div className="regester">
+      {
+        isError ?
+          <Alert message="请输入符合规定的用户名密码,保证信息的完整" type="error" style={{marginBottom:'30px'}}/>
+          : null
+      }
+
       <Form
         {...layout}
         name="basic"
         initialValues={{ remember: true }}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
+        form={form}
       >
         <Form.Item
           label="用户名"

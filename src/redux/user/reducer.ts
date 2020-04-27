@@ -1,14 +1,49 @@
-import { handleActions } from 'redux-actions'
-import actionTypes from './action-types';
+import { handleActions, createActions, combineActions, createAction } from 'redux-actions'
+import actionTypes from './actionTypes';
+import jwt_decode from 'jwt-decode'
+
+const Authorization: any = localStorage.getItem('Authorization')
+const { username } = Authorization ? jwt_decode(Authorization) : { username: '' }
+
 const defaultStatus = {
-  username: ''
+  username
 }
-export default (state = defaultStatus, action: any) => {
-  if (action.type === 'setCurrentUser') {
-    let newState = JSON.parse(JSON.stringify(state)) //深度拷贝state
-    console.log(action)
-    newState.username = action.value
-    return newState
-  }
-  return state
-}
+// combineAction createActions func
+// const {
+//   increment,
+//   decrement
+// } = createActions({
+//   'INCREMENT': (amount = 1) => ({
+//     amount
+//   }),
+//   'DECREMENT': (amount = 1) => ({
+//     amount: -amount
+//   })
+// })
+
+// const reducer = handleActions({
+//     [combineActions(increment, decrement)]: (state, {
+//       payload: {
+//         amount
+//       }
+//     }) => ({
+//       ...state,
+//       counter: state.counter + amount
+//     })
+//   },
+//   defaultState)
+export const { quitLogin }: any = createActions(actionTypes.quitLogin)
+export default handleActions(
+  {
+    [actionTypes.setCurrentUser]: (state, { payload: { username } }) => {
+      return {
+        ...state,
+        username
+      }
+    },
+    [quitLogin]: (state) => ({
+      ...state,
+      username: ''
+    })
+  }, defaultStatus
+)

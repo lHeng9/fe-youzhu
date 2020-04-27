@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Form, Input, Checkbox } from 'antd';
+import { Form, Input, Checkbox, Alert } from 'antd';
 
 const layout = {
   labelCol: { span: 6 },
@@ -9,7 +9,7 @@ const tailLayout = {
   wrapperCol: { offset: 6, span: 16 },
 };
 const Login = (props: any) => {
-  const {form} = props
+  const {form,isError} = props
   const onFinish = (values:any) => {
     console.log('Success:', values);
   };
@@ -19,6 +19,11 @@ const Login = (props: any) => {
   };
   return (
     <div className="login">
+      {
+        isError ?
+          <Alert message="用户名或者密码不正确" type="error" style={{marginBottom:'30px'}}/>
+          : null
+      }
       <Form
         {...layout}
         name="basic"
