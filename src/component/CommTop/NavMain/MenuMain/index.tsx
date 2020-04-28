@@ -1,17 +1,26 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import './index.scss'
 import { Menu } from 'antd';
 import { AlignLeftOutlined, HighlightOutlined, ApiOutlined, ControlOutlined, ConsoleSqlOutlined, LaptopOutlined, SkinOutlined, CoffeeOutlined, FormatPainterOutlined, GiftOutlined, NotificationOutlined, ShopOutlined, BgColorsOutlined } from '@ant-design/icons';
 import { withRouter } from 'react-router-dom'
-import {fetchTypesThunk } from '../../../../redux/types/action'
-import {connect} from 'react-redux'
+import { fetchTypesThunk } from '../../../../redux/types/action'
+import { connect } from 'react-redux'
+import ShowSubList from './SubMenu/index'
 
 const { SubMenu } = Menu;
-const typesIcon = [<ApiOutlined />,<ControlOutlined />,<ConsoleSqlOutlined />,<HighlightOutlined />,<LaptopOutlined />,<ShopOutlined />,<SkinOutlined />,<CoffeeOutlined />]
+const typesIcon = [<ApiOutlined />, <ControlOutlined />, <ConsoleSqlOutlined />, <HighlightOutlined />, <LaptopOutlined />, <ShopOutlined />, <SkinOutlined />, <CoffeeOutlined />]
+
 const MenuMain = (props: any) => {
-  const { location,fetchTypes,types } = props
+  const { location, fetchTypes, types } = props
   const [showSub, setShowSub] = useState<string[]>([])
-  const { allTypes} = types
+  const [clickKey, setClickKey] = useState('')
+  const [show,setShow] = useState(false)
+  const { allTypes } = types
+  const subMenuRef = useRef(null)
+  function handleOutClick(e:any){
+    const target = e.target
+    console.log(target)
+  }
   useEffect(() => {
     if (location.pathname === '/index') {
       setShowSub(['sub'])
@@ -20,17 +29,38 @@ const MenuMain = (props: any) => {
     }
   }, [location])
   useEffect(() => {
-    fetchTypes ()
+    fetchTypes()
   }, [])
-  
+  useEffect(() => {
+    if (clickKey) {
+      setShow(true)
+    }
+    if (showSub.length === 0) {
+      setShow(false)
+      setClickKey('')
+    }
+  }, [clickKey, showSub])
+  useEffect(() => {
+    document.addEventListener('click',handleOutClick)
+    return function () {
+      document.removeEventListener('click', handleOutClick);
+
+    }
+  },[])
+  function handleClick(e: any) {
+    const { key } = e
+    setClickKey(key)
+    console.log('ref',subMenuRef)
+  }
   return (
-    <div className='menu-main'>
+    <div className='menu-main' >
       <Menu
         theme='light'
         style={{ width: 200 }}
         openKeys={showSub}
         mode="inline"
         onOpenChange={onOpenChange}
+        onClick={handleClick}
       >
         <SubMenu
           key="sub"
@@ -58,7 +88,9 @@ const MenuMain = (props: any) => {
           <Menu.Item key="12"><FormatPainterOutlined />印刷品/印章</Menu.Item>
         </SubMenu>
       </Menu>
-    </div>
+      <ShowSubList {...props} clickKey={clickKey} show={show} ref={subMenuRef}/>
+
+    </div >
   )
   function onOpenChange(v: string[]) {
     setShowSub(v)
@@ -68,9 +100,9 @@ const MenuMain = (props: any) => {
 
 export default connect(
   (state: any) => ({
-    types:state.types
+    types: state.types
   }),
-  (dispatch:any) => ({
-    fetchTypes:()=> dispatch(fetchTypesThunk())
+  (dispatch: any) => ({
+    fetchTypes: () => dispatch(fetchTypesThunk())
   })
 )(withRouter(MenuMain))

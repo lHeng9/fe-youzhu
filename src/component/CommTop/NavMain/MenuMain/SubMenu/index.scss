@@ -1,0 +1,37 @@
+.submenu{
+  position:absolute;
+  left:200px;
+  width:700px;
+  height:480px;
+  background-color: #e3e4e5;
+  z-index: 9;
+  padding:0 20px;
+  display: flex;
+  flex-direction: column;
+  li{
+    list-style: none;
+    display:flex;
+    .sub-title{
+      font-size:14px;
+      color:#666;
+      font-weight:bold;
+      line-height: 42px;
+      display: block;
+      width:90px;
+      height:42px;
+      flex-shrink: 0;
+    }
+    .item{
+      padding:0 10px;
+      margin:5px 0;
+      border-left:1px solid #fff;
+      color:#333;
+      &:hover{
+        color:#7149c0
+      }
+    }
+  }
+}
+.hidden{
+  display:none;
+}
