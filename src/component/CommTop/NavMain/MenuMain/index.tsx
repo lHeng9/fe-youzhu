@@ -16,10 +16,16 @@ const MenuMain = (props: any) => {
   const [clickKey, setClickKey] = useState('')
   const [show,setShow] = useState(false)
   const { allTypes } = types
-  const subMenuRef = useRef(null)
+  const subMenuRef = useRef()
+  const menuMainRef = React.useRef() as React.MutableRefObject<HTMLInputElement>
   function handleOutClick(e:any){
     const target = e.target
-    console.log(target)
+    const menu = menuMainRef.current || target
+    if (menu.contains(target)) {
+      setShow(true)
+    } else if (!target.contains(menu)) {
+      setShow(false)
+    }
   }
   useEffect(() => {
     if (location.pathname === '/index') {
@@ -32,28 +38,18 @@ const MenuMain = (props: any) => {
     fetchTypes()
   }, [])
   useEffect(() => {
-    if (clickKey) {
-      setShow(true)
-    }
-    if (showSub.length === 0) {
-      setShow(false)
-      setClickKey('')
-    }
-  }, [clickKey, showSub])
-  useEffect(() => {
-    document.addEventListener('click',handleOutClick)
+    document.addEventListener('click', handleOutClick)
     return function () {
       document.removeEventListener('click', handleOutClick);
-
     }
   },[])
   function handleClick(e: any) {
     const { key } = e
     setClickKey(key)
-    console.log('ref',subMenuRef)
+    
   }
   return (
-    <div className='menu-main' >
+    <div className='menu-main' ref={menuMainRef}>
       <Menu
         theme='light'
         style={{ width: 200 }}

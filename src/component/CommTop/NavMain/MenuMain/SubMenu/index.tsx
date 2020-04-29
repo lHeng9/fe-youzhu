@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React from 'react';
 import './index.scss'
 import { Empty } from 'antd';
 import { Link } from 'react-router-dom';
@@ -9,7 +9,7 @@ const SubMenu = (props: any) => {
   console.log(clickKey)
  
   return (
-    <div className={show ? 'submenu' : 'submenu hidden'} style={clickKey && Number(clickKey) < 9 ? {} : { alignItems: 'center', justifyContent: 'center' }}>
+    <div  className={show ? 'submenu' : 'submenu hidden'} style={clickKey && Number(clickKey) < 9 ? {} : { alignItems: 'center', justifyContent: 'center' }}>
       {allTypes.length && clickKey && Number(clickKey) < 9 ? allTypes[Number(clickKey) - 1].child.map((item: any) => {
         return (
           <li>
@@ -30,4 +30,4 @@ const SubMenu = (props: any) => {
   )
 }
 
-export default forwardRef(SubMenu)
+export default SubMenu
