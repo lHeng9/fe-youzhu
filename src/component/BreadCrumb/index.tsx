@@ -6,7 +6,8 @@ import routes from '../../routes/config'
 
 const breadcrumbNameMap:any = {
   '/index': 'Home',
-  '/newSell': '最新促销',
+  '/commodity':'商品',
+  '/commodity/newSell': '最新促销',
   '/guide': '专业导购',
   '/pointsMall': '积分商城',
   '/about': '关于优助',
@@ -14,7 +15,6 @@ const breadcrumbNameMap:any = {
 const BreadCrumb = (props: any) => {
   const { location } = props;
   const pathSnippets = location.pathname.split('/').filter((i: any) => i);
-  console.log('pathSnippets',pathSnippets)
   const extraBreadcrumbItems = pathSnippets.map((_:any, index:any) => {
     const url = `/${pathSnippets.slice(0, index + 1).join('/')}`;
     return (
